@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EmZi Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0b1b2f;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 18px 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #2563eb;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #0b1b2f;
+            font-weight: 400;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #2563eb;
+        }
+
+        nav a.active {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .btn-google {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            color: #2563eb;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-google:hover {
+            background: #2563eb;
+            border-color: #2563eb;
+            color: #fff;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero (Главная) */
+        .hero {
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+
+        .hero h1 .highlight {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 600px;
+            margin: 16px auto 32px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #334155;
+        }
+
+        .stat-item i {
+            color: #2563eb;
+            font-size: 1.4rem;
+        }
+
+        /* Games Section */
+        .games-section {
+            padding: 40px 0 60px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-title .highlight {
+            color: #2563eb;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 48px;
+            font-size: 1.05rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 28px 24px 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: #2563eb;
+            box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+        }
+
+        .game-image {
+            width: 100%;
+            max-width: 200px;
+            aspect-ratio: 480/960;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+            transition: transform 0.3s ease;
+            background: #f1f5f9;
+        }
+
+        .game-card:hover .game-image {
+            transform: scale(1.02);
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .game-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .game-card .game-genre {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2563eb;
+            background: #eef2ff;
+            padding: 4px 16px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 14px;
+        }
+
+        .game-card .game-description {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            text-align: left;
+            line-height: 1.6;
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .game-card .game-description::-webkit-scrollbar {
+            width: 4px;
+        }
+        .game-card .game-description::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .btn-play {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-play:hover {
+            background: #1d4ed8;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        /* ===== СТРАНИЦА "О НАС" ===== */
+        .about-section {
+            padding: 60px 0 60px;
+        }
+
+        .about-hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .about-hero h1 .highlight {
+            color: #2563eb;
+        }
+
+        .about-hero p {
+            font-size: 1.2rem;
+            color: #475569;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .about-story {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 48px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+            margin-bottom: 50px;
+        }
+
+        .about-story-text h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .about-story-text h2 i {
+            color: #2563eb;
+            margin-right: 10px;
+        }
+
+        .about-story-text p {
+            color: #475569;
+            font-size: 1.05rem;
+            margin-bottom: 16px;
+        }
+
+        .about-story-text .signature {
+            font-style: italic;
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+
+        .about-story-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-story-image .bros-illustration {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1/1;
+            background: linear-gradient(145deg, #eef2ff, #dbeafe);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 5rem;
+            color: #2563eb;
+            border: 2px dashed #c7d2fe;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .about-story-image .bros-illustration span {
+            font-size: 1rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .about-values {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .value-card {
+            background: #ffffff;
+            padding: 28px 20px;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .value-card:hover {
+            border-color: #2563eb;
+            transform: translateY(-4px);
+        }
+
+        .value-card i {
+            font-size: 2.2rem;
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .value-card h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .value-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 40px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #0b1b2f;
+        }
+
+        .modal h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .modal .modal-sub {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+            background: #f8fafc;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+            transform: scale(1.02);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .form-success i {
+            font-size: 4rem;
+            color: #22c55e;
+            margin-bottom: 16px;
+        }
+
+        .form-success h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .form-success p {
+            color: #64748b;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            border-top: 1px solid #e2e8f0;
+            padding: 28px 0;
+            background: #ffffff;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            color: #94a3b8;
+            margin-left: 20px;
+            font-size: 1.3rem;
+            transition: color 0.2s;
+        }
+
+        .footer-social a:hover {
+            color: #2563eb;
+        }
+
+        .footer-copy {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Back to top */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #backToTop:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .hero-stats {
+                gap: 24px;
+            }
+            .header-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+            .games-grid {
+                grid-template-columns: 1fr;
+                max-width: 360px;
+                margin: 0 auto;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-social a {
+                margin: 0 12px;
+            }
+            .about-story {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+                text-align: center;
+            }
+            .about-hero h1 {
+                font-size: 2.2rem;
+            }
+            .about-story-image .bros-illustration {
+                max-width: 280px;
+                font-size: 4rem;
+                padding: 30px;
+            }
+            .game-card .game-description {
+                max-height: 150px;
+                font-size: 0.9rem;
+            }
+            .modal {
+                padding: 28px 20px;
+            }
+            .game-image {
+                max-width: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .game-image {
+                max-width: 140px;
+            }
+            .about-story {
+                padding: 20px 16px;
+            }
+            .about-story-text h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo" onclick="showPage('home')">
+            <i class="fas fa-gamepad"></i>
+            EmZi<span>Games</span>
+        </div>
+        <nav>
+            <a class="active" onclick="showPage('home')" id="nav-home">Игры</a>
+            <a onclick="showPage('about')" id="nav-about">О нас</a>
+            <a onclick="openSupportModal()" id="nav-support">Поддержка</a>
+            <button class="btn-google" onclick="window.open('https://play.google.com/store/apps/developer?id=EmZi&hl=ru', '_blank')">
+                <i class="fab fa-google-play"></i> Google Play
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <!-- ===== ГЛАВНАЯ СТРАНИЦА ===== -->
+    <div class="page active" id="page-home">
+        <section class="hero">
+            <div class="container">
+                <h1>Игры от <span class="highlight">EmZi</span></h1>
+                <p>Качественные, увлекательные и полезные игры для всех возрастов. Скачивайте в Google Play!</p>
+                <div class="hero-stats">
+                    <div class="stat-item"><i class="fas fa-rocket"></i> 3+ игры</div>
+                    <div class="stat-item"><i class="fas fa-star"></i> Высокий рейтинг</div>
+                    <div class="stat-item"><i class="fas fa-users"></i> Тысячи игроков</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="games-section">
+            <div class="container">
+                <h2 class="section-title">Наши <span class="highlight">игры</span></h2>
+                <p class="section-sub">Погрузитесь в мир веселья и пользы вместе с EmZi</p>
+
+                <div class="games-grid">
+                    <!-- BroblBox -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://play-lh.googleusercontent.com/VHs-l-PHS9ptLU3WFdJKF8s44yu5FDbzXiNpP7KR92zUGJbxx-a0W1Iho1NJk0at_XAeEuiU8YQuRP4KQLuU=w480-h960-rw" 
+                                 alt="BroblBox" 
+                                 loading="lazy">
+                        </div>
+                        <h3>BroblBox</h3>
+                        <span class="game-genre"><i class="fas fa-tag"></i> Аркада</span>
+                        <div class="game-description">
+                            Живя в доме моей бабушки, я решил, что мне нужно как-то отсюда выбраться... Именно поэтому я сделал эту игру!<br><br>
+                            🎁 Открывай сундуки и получай лучших персонажей, собранных со всего интернета!<br>
+                            🔍 Исследуй комнату, в которой находишься — советую проверить её на наличие пасхальных яиц!<br>
+                            🎮 Играй в мини-игры, зарабатывай монеты и открывай новых героев! Собери их всех!
+                        </div>
+                        <button class="btn-play" onclick="window.open('https://play.google.com/store/apps/details?id=com.EmZi.BroblBox', '_blank')">
+                            <i class="fab fa-google-play"></i> Скачать
+                        </button>
+                    </div>
+
+                    <!-- Бабл Класс -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://play-lh.googleusercontent.com/arnAeUPDHgzcx9_LQskLVWu9egj1Dr_5uY-nLDiC85UeruZFcJdRh7uJLYBFec3hJCDx0mYTSaGPQgwoixWdDw=w480-h960-rw" 
+                                 alt="Бабл Класс" 
+                                 loading="lazy">
+                        </div>
+                        <h3>Бабл Класс</h3>
+                        <span class="game-genre"><i class="fas fa-tag"></i> Кликер</span>
+                        <div class="game-description">
+                            Давно ли ты заглядывал в сундуки?<br>
+                            У нас как раз есть подходящие! Всё что тебе нужно это один клик! Один клик разделяет тебя от встречи с крутыми персонажами!<br><br>
+                            👆 Кликай на уже попавшихся персонажей и получай монетки!<br>
+                            🎁 Открывай эксклюзивные сундуки<br>
+                            ⭐ Уникальные герои, собери их всех!
+                        </div>
+                        <button class="btn-play" onclick="window.open('https://play.google.com/store/apps/details?id=com.EmZi.BubbleKlass', '_blank')">
+                            <i class="fab fa-google-play"></i> Скачать
+                        </button>
+                    </div>
+
+                    <!-- Продлёнка -->
+                    <div class="game-card">
+                        <div class="game-image">
+                            <img src="https://play-lh.googleusercontent.com/T4lq9kzJVIGpZCSJOL8lZ3aXd8q04O5K72EqgwTBRpjcd59ZvpqA1grfaclc1lkZMNYuRBEctbKLYL-IB-WPBg=w480-h960-rw" 
+                                 alt="Продлёнка" 
+                                 loading="lazy">
+                        </div>
+                        <h3>Продлёнка</h3>
+                        <span class="game-genre"><i class="fas fa-tag"></i> Хоррор</span>
+                        <div class="game-description">
+                            Продлёнка — это увлекательная игра-хоррор в школьном сеттинге. Вы играете за школьника, которого оставили на продлёнку за плохое поведение. Вам нужно отбиваться от мемов, решать различные головоломки и выбраться из школы любой ценой!<br><br>
+                            🏫 Вы просыпаетесь на 4-м этаже школы №10. Найдите ключи от всех кабинетов и соберите все пасхальные яйца. По пути вам встретится множество мемов — старайтесь не попасться им. Дойдите до конца и встретьтесь с финальным боссом. Победить его или выключить стрим — решать вам!
+                        </div>
+                        <button class="btn-play" onclick="window.open('https://play.google.com/store/apps/details?id=com.EmZi.Prodlonka', '_blank')">
+                            <i class="fab fa-google-play"></i> Скачать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== СТРАНИЦА "О НАС" ===== -->
+    <div class="page" id="page-about">
+        <section class="about-section">
+            <div class="container">
+                <div class="about-hero">
+                    <h1>О нас — <span class="highlight">EmZi Games</span></h1>
+                    <p>Мы — два братана, которые превратили любовь к играм в дело всей жизни</p>
+                </div>
+
+                <div class="about-story">
+                    <div class="about-story-text">
+                        <h2><i class="fas fa-handshake"></i> Как всё начиналось</h2>
+                        <p>Всё началось с обычного вечера за приставкой. Мы, два братана — <strong>Эмиль</strong> и <strong>Артур</strong>, — сидели и играли в очередную игру, и вдруг поняли: <em>«А почему бы нам не делать игры самим?»</em></p>
+                        <p>Сначала это была шутка. Потом — эксперимент. А теперь мы создаём игры, в которые сами играем с удовольствием. Мы не просто разработчики — мы такие же геймеры, как и вы.</p>
+                        <p>Наша цель: делать игры, которые дарят эмоции, заставляют думать и просто поднимают настроение. Без скучных уроков — только кайф и польза!</p>
+                        <p><strong>Не судите строго, я делаю игры уже 5 лет!</strong> — говорит Эмиль, и мы учимся и растем каждый день.</p>
+                        <div class="signature">— Братаны EmZi</div>
+                    </div>
+                    <div class="about-story-image">
+                        <div class="bros-illustration">
+                            <i class="fas fa-users"></i>
+                            <span>👊 Эмиль + Артур</span>
+                            <span style="font-size: 0.9rem; opacity: 0.7;">— два братана, одна миссия</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="text-align: center; font-size: 1.5rem; margin-bottom: 20px;">Наши ценности</h3>
+                <div class="about-values">
+                    <div class="value-card">
+                        <i class="fas fa-heart"></i>
+                        <h4>С душой</h4>
+                        <p>Каждая игра — это частичка нас. Мы делаем с любовью</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Креативность</h4>
+                        <p>Не боимся экспериментировать и придумывать новое</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-smile"></i>
+                        <h4>Радость</h4>
+                        <p>Главное — чтобы игроки улыбались и возвращались снова</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Развитие</h4>
+                        <p>Мы постоянно растем и учимся новому. Уже 5 лет!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО ПОДДЕРЖКИ ===== -->
+<div class="modal-overlay" id="supportModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeSupportModal()">&times;</button>
+        
+        <!-- Форма -->
+        <div id="formContainer">
+            <h2>📬 Связаться с нами</h2>
+            <p class="modal-sub">Напишите нам, и мы ответим в ближайшее время!</p>
+            
+            <form id="supportForm" onsubmit="sendEmail(event)">
+                <div class="form-group">
+                    <label for="userName">Ваше имя</label>
+                    <input type="text" id="userName" placeholder="Введите имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Ваш Email</label>
+                    <input type="email" id="userEmail" placeholder="example@mail.ru" required>
+                </div>
+                <div class="form-group">
+                    <label for="userMessage">Сообщение</label>
+                    <textarea id="userMessage" placeholder="Опишите ваш вопрос или предложение..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Отправить
+                </button>
+            </form>
+        </div>
+
+        <!-- Сообщение об успехе -->
+        <div class="form-success" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <h3>Готово! ✅</h3>
+            <p>Ваше письмо отправлено! Мы свяжемся с вами в ближайшее время.</p>
+            <button class="btn-submit" style="margin-top: 20px;" onclick="closeSupportModal()">
+                Закрыть
+            </button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container footer-inner">
+        <div class="footer-copy">
+            &copy; 2026 EmZi Games. Все права защищены.
+        </div>
+        <div class="footer-social">
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+            <a href="#" aria-label="Google Play" onclick="window.open('https://play.google.com/store/apps/developer?id=EmZi&hl=ru', '_blank')"><i class="fab fa-google-play"></i></a>
+        </div>
+    </div>
+</footer>
+
+<button id="backToTop" aria-label="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+    // ===== ПЕРЕКЛЮЧЕНИЕ СТРАНИЦ =====
+    function showPage(page) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-' + page).classList.add('active');
+        
+        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+        const navLink = document.getElementById('nav-' + page);
+        if (navLink) navLink.classList.add('active');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ===== МОДАЛЬНОЕ ОКНО =====
+    function openSupportModal() {
+        document.getElementById('supportModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        document.getElementById('formContainer').style.display = 'block';
+        document.getElementById('successMessage').classList.remove('active');
+        document.getElementById('supportForm').reset();
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Отправить';
+    }
+
+    function closeSupportModal() {
+        document.getElementById('supportModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('supportModal').addEventListener('click', function(e) {
+        if (e.target === this) closeSupportModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeSupportModal();
+    });
+
+    // ===== ОТПРАВКА ПИСЬМА =====
+    function sendEmail(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('userName').value.trim();
+        const email = document.getElementById('userEmail').value.trim();
+        const message = document.getElementById('userMessage').value.trim();
+
+        if (!name || !email || !message) {
+            alert('Пожалуйста, заполните все поля!');
+            return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
+
+        const subject = encodeURIComponent(`Сообщение от ${name} (EmZi Games)`);
+        const body = encodeURIComponent(
+            `Имя: ${name}\n` +
+            `Email: ${email}\n\n` +
+            `Сообщение:\n${message}`
+        );
+
+        window.location.href = `mailto:trace.ytchannel@gmail.com?subject=${subject}&body=${body}`;
+
+        setTimeout(() => {
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('active');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить';
+        }, 500);
+    }
+
+    // ===== КНОПКА "НАВЕРХ" =====
+    const backBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        backBtn.classList.toggle('show', window.scrollY > 300);
+    });
+    backBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    console.log('🚀 EmZi Games (светлая тема) загружена!');
+</script>
+</body>
+</html>
